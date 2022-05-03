@@ -1,6 +1,6 @@
 import os
 
-from fastapi import FastAPI
+from fastapi import APIRouter, Depends
 from fastapi.responses import Response
 from fastapi_login import LoginManager
 
@@ -14,8 +14,8 @@ from models import RegisterUser, LoginUser
 
 load_dotenv()
 
-auth = FastAPI()
-manager = LoginManager(os.environ.get("SECRET"), "/login", use_cookie=True)
+router = APIRouter()
+manager = LoginManager(os.environ.get("SECRET"), "/login")
 deta = Deta(os.environ.get("DETA_KEY"))
 users = deta.Base("pastegram-users")
 
@@ -25,8 +25,11 @@ def query_user(username: str):
     return users.get(username)
 
 
-@auth.post("/register")
+@router.post("/register")
 def register(user: RegisterUser, response: Response):
+    '''
+    Register new user
+    '''
     exists = True if query_user(user.username) is not None else False
 
     if exists:
@@ -42,8 +45,11 @@ def register(user: RegisterUser, response: Response):
         return {"error": "An Unknown error occurred!", "exception": str(e)}
 
 
-@auth.post("/login")
+@router.post("/login")
 def login(user: LoginUser, response: Response):
+    '''
+    Login to an existing account
+    '''
     exists = True if (user_ := query_user(user.username)) is not None else False
 
     if not exists:
