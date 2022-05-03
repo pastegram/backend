@@ -24,7 +24,7 @@
 ## user
 
 - GET&ensp;&ensp;&ensp;&ensp;&ensp;/api/:username&ensp;&ensp;&ensp;&ensp;gets user information (profile page stuff)
-- POST&ensp;&ensp;&ensp;&ensp;/api/:username&ensp;&ensp;&ensp;&ensp;make new user (body will contain schema data)
+- ~~POST&ensp;&ensp;&ensp;&ensp;/api/:username&ensp;&ensp;&ensp;&ensp;make new user (body will contain schema data)~~
 - \*UPDATE&ensp;&ensp;/api/:username&ensp;&ensp;&ensp; update values
 - \*DELETE&ensp;&ensp;/api/:username&ensp;&ensp;&ensp;&ensp;move user to deleted collection for 30 days before deleting
 
