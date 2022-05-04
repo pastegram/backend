@@ -4,3 +4,4 @@ fastapi==0.75.2
 pydantic==1.9.0
 python-dotenv==0.20.0
 pytz==2022.1
+guesslang==2.2.1

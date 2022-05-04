@@ -13,7 +13,7 @@ deta = Deta(os.environ.get("DETA_KEY"))
 del_cache = deta.Base("pastegram-deleted")
 
 
-@router.get("/{username}")
+@router.get("/users/{username}")
 def get_user(username: str):
     user_ = users.get(username)
 
@@ -26,7 +26,7 @@ def get_user(username: str):
     return {"user": None}
 
 
-@router.put("/{username}")
+@router.put("/users/{username}")
 def del_user(username: str, new_user: UpdateUser, user=Depends(manager)):
     if user["key"] == username:
         if (user_ := users.get(new_user.username)) is None:
@@ -40,7 +40,7 @@ def del_user(username: str, new_user: UpdateUser, user=Depends(manager)):
     return {"error": "Authenticated as different user!"}
 
 
-@router.delete("/{username}")
+@router.delete("/users/{username}")
 def del_user(username: str, user=Depends(manager)):
     if user["key"] == username:
         if (user_ := users.get(username)) is not None:
